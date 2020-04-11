@@ -13,25 +13,20 @@ namespace Models
     private int cycles = 0;
 
     private World world;
-    private List<Model> worldObjects;
 
-    public Tasks(World world, List<Model> worldObjects)
+    public Tasks(World world)
     {
       this.world = world;
-      this.worldObjects = worldObjects;
     }
 
     public void Update()
     {
-      Truck truck = (Truck)worldObjects[4];
-      Robot robot1 = (Robot)worldObjects[0];
-      Robot robot2 = (Robot)worldObjects[1];
-      Robot robot3 = (Robot)worldObjects[2];
-      Robot robot4 = (Robot)worldObjects[3];
-      Package package1 = (Package)worldObjects[28 + (4 * cycles)];
-      Package package2 = (Package)worldObjects[29 + (4 * cycles)];
-      Package package3 = (Package)worldObjects[30 + (4 * cycles)];
-      Package package4 = (Package)worldObjects[31 + (4 * cycles)];
+      Truck truck = (Truck)world.worldObjects[4];
+      Robot robot1 = (Robot)world.worldObjects[0];
+      Robot robot2 = (Robot)world.worldObjects[1];
+      Robot robot3 = (Robot)world.worldObjects[2];
+      Robot robot4 = (Robot)world.worldObjects[3];
+      
 
       if (truck.truckHere == true)
       {
@@ -43,6 +38,7 @@ namespace Models
 
       if (robot1.robotReady == true)
       {
+        Package package1 = (Package)world.worldObjects[28 + cycles];
         MovePackage(robot1, package1, robot1.x, robot1.y, robot1.z);
         robot1.ChangePackage(package1);
         robot1.ChangeRobotReady(false);
@@ -51,7 +47,8 @@ namespace Models
       }
 
       if (robot2.robotReady == true)
-      {
+      {      
+        Package package2 = (Package)world.worldObjects[29 + cycles];
         MovePackage(robot2, package2, robot2.x, robot2.y, robot2.z);
         robot2.ChangePackage(package2);
         robot2.ChangeRobotReady(false);
@@ -60,7 +57,8 @@ namespace Models
       }
 
       if (robot3.robotReady == true)
-      {
+      {      
+        Package package3 = (Package)world.worldObjects[30 + cycles];
         MovePackage(robot3, package3, robot3.x, robot3.y, robot3.z);
         robot3.ChangePackage(package3);
         robot3.ChangeRobotReady(false);
@@ -70,6 +68,7 @@ namespace Models
 
       if (robot4.robotReady == true)
       {
+        Package package4 = (Package)world.worldObjects[31 + cycles];
         MovePackage(robot4, package4, robot4.x, robot4.y, robot4.z);
         robot4.ChangePackage(package4);
         robot4.ChangeRobotReady(false);
@@ -111,7 +110,7 @@ namespace Models
       if (robot1.robotReset == true && robot2.robotReset == true && robot3.robotReset == true && robot4.robotReset == true)
       {
         ReadySetGo = 0;
-        cycles++;
+        cycles+=4;
         robot1.RESET();
         robot2.RESET();
         robot3.RESET();

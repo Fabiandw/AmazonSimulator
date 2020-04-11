@@ -17,7 +17,6 @@ namespace Models
 		public void Store(){
 			Random rnd = new Random();
 			double random = rnd.Next(1,4);
-			Console.WriteLine(random);
 			switch(random){
 				case 1:
 				this.targetY = this.y+0.1;

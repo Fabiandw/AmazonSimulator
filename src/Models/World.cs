@@ -12,45 +12,28 @@ namespace Models
     private List<string> iList = new List<string> { "null3", "null2", "null1", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4", "E1", "E2", "E3", "E4", "F1", "F2", "F3", "F4", "G1", "G2", "G3", "G4", "H1", "H2", "H3", "H4", "I1", "I2", "I3", "I4", "K1", "K2", "K3", "K4", "L1", "L2", "L3", "L4", "M1", "M2", "M3", "M4", "N1", "N2", "N3", "N4", "O1", "O2", "O3", "O4", "P1", "P2", "P3", "P4", "T1", "T2", "T3", "T4" };
     private List<double> xList = new List<double> { 0, 0, 0, 0, -15, -15, -15, 0, 0, 15, 15, 15, -30, -30, -30, -30, -15, 0, 15, 30, 30, 30, 30, -3, -6, -9, -12, -18, -21, -24, -27, -12, -9, -6, -3, -12, -9, -6, -3, 3, 6, 9, 12, 3, 6, 9, 12, 18, 21, 24, 27, 18, 21, 24, 27, 12, 9, 6, 3, -27, -24, -21, -18, -27, -24, -21, -18, -27, -24, -21, -18, -12, -9, -6, -3, 3, 6, 9, 12, 18, 21, 24, 27, 27, 24, 21, 18 };
     private List<double> zList = new List<double> { -12, -8, -4, 0, 0, 9, 18, 18, 9, 18, 9, 0, 0, 9, 18, 27, 27, 27, 27, 27, 18, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 18, 18, 18, 18, 18, 18, 18, 18, 9, 9, 9, 9, 18, 18, 18, 18, 9, 9, 9, 9, 0, 0, 0, 0, 9, 9, 9, 9, 18, 18, 18, 18, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 0, 0, 0, 0 };
-    private List<Model> worldObjects = new List<Model>();
+    public List<Model> worldObjects = new List<Model>();
     private List<IObserver<Command>> observers = new List<IObserver<Command>>();
 
     public Graph graph;
     private Tasks taskClass;
     private Robot robot1, robot2, robot3, robot4;
     private Truck truck;
-    private Package package1, package2, package3, package4, package5, package6, package7, package8, package9, package10, package11, package12, package13, package14, package15, package16, package17, package18, package19, package20;
+
     public World()
     {
       robot1 = CreateRobot("r1", 0, 0.301, 0, 50);
       robot2 = CreateRobot("r2", 0, 0.301, -4, 100);
       robot3 = CreateRobot("r3", 0, 0.301, -8, 150);
       robot4 = CreateRobot("r4", 0, 0.301, -12, 200);
-      truck = CreateTruck(-150, 0, -24);
+      truck = CreateTruck(-150, 0.001, -24);
       MakeNodes(23);
-      package1 = CreatePackage(-300, 1.401, -300);
-      package2 = CreatePackage(-300, 1.401, -300);
-      package3 = CreatePackage(-300, 1.401, -300);
-      package4 = CreatePackage(-300, 1.401, -300);
-      package5 = CreatePackage(-300, 1.401, -300);
-      package6 = CreatePackage(-300, 1.401, -300);
-      package7 = CreatePackage(-300, 1.401, -300);
-      package8 = CreatePackage(-300, 1.401, -300);
-      package9 = CreatePackage(-300, 1.401, -300);
-      package10 = CreatePackage(-300, 1.401, -300);
-      package11 = CreatePackage(-300, 1.401, -300);
-      package12 = CreatePackage(-300, 1.401, -300);
-      package13 = CreatePackage(-300, 1.401, -300);
-      package14 = CreatePackage(-300, 1.401, -300);
-      package15 = CreatePackage(-300, 1.401, -300);
-      package16 = CreatePackage(-300, 1.401, -300);
-      package17 = CreatePackage(-300, 1.401, -300);
-      package18 = CreatePackage(-300, 1.401, -300);
-      package19 = CreatePackage(-300, 1.401, -300);
-      package20 = CreatePackage(-300, 1.401, -300);
+      for(int i=0; i<4; i++){
+        CreatePackage(-300, 1.401, -300);
+      }
       graph = new Graph();
       graph = Graphy();
-      taskClass = new Tasks(this, this.worldObjects.ToList());
+      taskClass = new Tasks(this);
     }
 		
     public Graph Graphy()
@@ -150,6 +133,9 @@ namespace Models
 
     public void TruckHere()
     {
+      for(int i=0; i<4; i++){
+      CreatePackage(-300, 1.401, -300);
+      }
       RobotOnPath(robot1, "A");
       RobotOnPath(robot2, "null1");
       RobotOnPath(robot3, "null2");
@@ -170,11 +156,10 @@ namespace Models
       return t;
     }
 
-    public Package CreatePackage(double x, double y, double z)
+    public void CreatePackage(double x, double y, double z)
     {
       Package s = new Package(x, y, z, 0, 0, 0);
       worldObjects.Add(s);
-      return s;
     }
 
     private void RobotOnPath(Robot r, string begin)
