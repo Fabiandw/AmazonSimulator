@@ -127,7 +127,7 @@ let createDock = (x,z) => {
 	var material = new THREE.MeshBasicMaterial( {color: 0x000000, side: THREE.DoubleSide} );
 	var plane = new THREE.Mesh( geometry, material );
 	plane.rotation.y = Math.PI / 2.0;
-	plane.position.x = 1.5001;
+	plane.position.x = 1.501;
 	plane.position.z = 0;
 	plane.position.y = 0.3;
 	scene.add( plane );
@@ -145,7 +145,7 @@ let createDock = (x,z) => {
 	var material = new THREE.MeshBasicMaterial( {color: 0x000000, side: THREE.DoubleSide} );
 	var plane = new THREE.Mesh( geometry, material );
 	plane.rotation.y = Math.PI / 2.0;
-	plane.position.x = -1.5001;
+	plane.position.x = -1.501;
 	plane.position.z = 0;
 	plane.position.y = 1.2;
 	scene.add( plane );

@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace Models
 {
-	interface IUpdatable
-	{
-		bool Update(int tick);
-	}
+    interface IUpdatable
+    {
+        bool Update(int tick);
+    }
 }
